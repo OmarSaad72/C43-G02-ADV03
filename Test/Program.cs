@@ -23,19 +23,34 @@
             //}
             #endregion
             #region Stack
-            Stack<int> stack = new Stack<int>();
-            stack.Push(1); // add elements in stack
-            stack.Push(2); // add elements in stack
-            stack.Push(3); // add elements in stack
-            stack.Push(4); // add elements in stack  , TOP
-            //Console.WriteLine(stack.Peek()); //return top elemnt
-            stack.Pop(); // remove elements in stack {start from top}
-            stack.Pop(); // remove elements in stack {start from top}
-            stack.Pop(); // remove elements in stack {start from top}
-            stack.Pop(); // remove elements in stack {start from top}
-            stack.TryPop(out int value); // remove elements in stack {start from top}, but handled the exceptions if stack was empty
-            stack.TryPeek(out int value2); // handled the exceptions if stack was empty and set default value
-            foreach (int i in stack)
+            //Stack<int> stack = new Stack<int>();
+            //stack.Push(1); // add elements in stack
+            //stack.Push(2); // add elements in stack
+            //stack.Push(3); // add elements in stack
+            //stack.Push(4); // add elements in stack  , TOP
+            ////Console.WriteLine(stack.Peek()); //return top elemnt
+            //stack.Pop(); // remove elements in stack {start from top}
+            //stack.Pop(); // remove elements in stack {start from top}
+            //stack.Pop(); // remove elements in stack {start from top}
+            //stack.Pop(); // remove elements in stack {start from top}
+            //stack.TryPop(out int value); // remove elements in stack {start from top}, but handled the exceptions if stack was empty
+            //stack.TryPeek(out int value2); // handled the exceptions if stack was empty and set default value
+            //foreach (int i in stack)
+            //{
+            //    Console.WriteLine(i);
+            //}
+            #endregion
+            #region Queue
+            Queue<int> queue = new Queue<int>();
+            queue.Enqueue(1); // add elements
+            queue.Enqueue(2);
+            queue.Enqueue(3);
+            queue.Dequeue(); // remove first element
+            queue.Dequeue(); // remove first element
+            queue.Dequeue(); // remove first element
+            queue.TryPeek(out int value);
+            //queue.TryDequeue(out int value2);
+            foreach (var i in queue)
             {
                 Console.WriteLine(i);
             }
