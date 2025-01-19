@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Test
 {
@@ -24,6 +25,20 @@ namespace Test
                 return a?.ToLower().GetHashCode() ?? 0;
             }
         }
+
+        class ComparerGenerics : IEqualityComparer<string>
+        {
+            public bool Equals(string? a, string? b)
+            {
+                return a?.ToLower().Equals(b?.ToLower()) ?? (b is null ? true : false);
+            }
+
+            public int GetHashCode([DisallowNull] string a)
+            {
+                return a?.ToLower().GetHashCode() ?? 0;
+            }
+        }
+
         static void Main()
         {
             #region LinkedList
@@ -74,11 +89,11 @@ namespace Test
             //}
             #endregion
             #region HashTable{Non-Generic}
-            Hashtable note = new Hashtable(/*new StringComparer()*/);
-            note.Add("Omar", 7132);
-            note.Add("Mai", 2445);
+            //Hashtable note = new Hashtable(/*new StringComparer()*/);
+            //note.Add("Omar", 7132);
+            //note.Add("Mai", 2445);
             //note.Add("mai", 445);  // Invalid
-            note.Add("Mohammed", 4332);
+            //note.Add("Mohammed", 4332);
             //Console.WriteLine(note["Omar"]);
             //note["Mai"] = 123;
             //Console.WriteLine(note["Mai"]);
@@ -87,10 +102,42 @@ namespace Test
             //    //Console.WriteLine(i);
             //    Console.WriteLine($"{i.Key}: {i.Value}");
             //}
-            Console.WriteLine(note.ContainsKey("Omar"));
-            Console.WriteLine(note.Contains("Sara"));
-            Console.WriteLine(note.ContainsValue(7132));
-            Console.WriteLine(note.ContainsValue(71));
+            //Console.WriteLine(note.ContainsKey("Omar"));
+            //Console.WriteLine(note.Contains("Sara"));
+            //Console.WriteLine(note.ContainsValue(7132));
+            //Console.WriteLine(note.ContainsValue(71));
+            #endregion
+            #region Dictionary
+            //KeyValuePair<string, int>[] keys = new KeyValuePair<string, int>[]
+            //{
+            //    new KeyValuePair<string, int>("Yara" ,424),
+            //    new KeyValuePair<string, int>("Ali" ,234),
+            //    new KeyValuePair<string, int>("Hala" ,256)
+            //};
+            //Dictionary<string, int> Note = new Dictionary<string, int>(keys)
+            Dictionary<string, int> Note = new Dictionary<string, int>(new ComparerGenerics())
+            {
+                {"Omar", 123},
+                {"Mai" ,321 },
+                {"Saad" ,456 },
+            };
+            //Note.Add("Sara", 766); //  InValid
+            //Note.Add("mai", 324);
+            Note.Remove("Mai");
+            Note.TryAdd("Sara", 766);
+            if (!Note.ContainsKey("Omar"))
+                Note.Add("Omar", 222);
+            else
+                Note["Omar"] = 222;
+            foreach (KeyValuePair<string, int> i in Note)
+            {
+                Console.WriteLine($"{i.Key}: {i.Value}");
+            }
+
+            //foreach (string key in Note.Keys)
+            //{
+            //    Console.WriteLine(key);
+            //}
             #endregion
         }
     }
