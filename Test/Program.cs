@@ -86,6 +86,14 @@ namespace Demo
             }
         }
 
+        class SortedSet : IComparer<int>
+        {
+            public int Compare(int x, int y)
+            {
+                return y.CompareTo(x);
+            }
+        }
+
         static void Main()
         {
             #region LinkedList
@@ -218,18 +226,30 @@ namespace Demo
             //    Console.WriteLine(movie);
             #endregion
             #region SortedList
-            SortedList<string, int> Note = new SortedList<string, int>(new SortedDictionary());
-            Note.Add("Omar", 7132);
-            Note.Add("Zain", 342);
-            Note.Add("Mazen", 132);
-            Note.SetValueAtIndex(2, 368);
-            foreach (KeyValuePair<string, int> i in Note)
+            //SortedList<string, int> Note = new SortedList<string, int>(new SortedDictionary());
+            //Note.Add("Omar", 7132);
+            //Note.Add("Zain", 342);
+            //Note.Add("Mazen", 132);
+            //Note.SetValueAtIndex(2, 368);
+            //foreach (KeyValuePair<string, int> i in Note)
+            //{
+            //    Console.WriteLine(i);
+            //}
+            //int result = Note.GetValueAtIndex(0);
+            //Console.WriteLine(result);  
+            //Console.WriteLine(Note.GetKeyAtIndex(0)); 
+            #endregion
+            #region SortedSet
+            SortedSet<int> Num = new SortedSet<int>(new SortedSet());
+            Num.Add(1);
+            Num.Add(3);
+            Num.Add(2);
+            Num.Add(4);
+            Num.Add(3);
+            foreach (int i in Num)
             {
                 Console.WriteLine(i);
             }
-            int result = Note.GetValueAtIndex(0);
-            Console.WriteLine(result);  
-            Console.WriteLine(Note.GetKeyAtIndex(0)); 
             #endregion
         }
     }
