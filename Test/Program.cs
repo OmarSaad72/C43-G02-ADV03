@@ -47,6 +47,45 @@ namespace Demo
             }
         }
 
+        class Movie : IEquatable<Movie>
+        {
+            public Movie(int id, string? title, double price)
+            {
+                Id = id;
+                Title = title;
+                Price = price;
+            }
+
+            public int Id { get; set; }
+            public string? Title { get; set; }
+            public double Price { get; set; }
+
+            //public override bool Equals(object? obj)
+            //{
+            //return obj is Movie movie &&
+            //Id == movie.Id &&
+            //Title == movie.Title &&
+            //Price == movie.Price;
+            //}
+
+            public bool Equals(Movie? movie)
+            {
+                return Id == movie?.Id &&
+                       Title == movie.Title &&
+                       Price == movie.Price;
+            }
+
+            public override int GetHashCode()
+            {
+                return HashCode.Combine(Id, Title, Price);
+            }
+
+            public override string ToString()
+            {
+                return $"{Title} & {Price}";
+            }
+        }
+
         static void Main()
         {
             #region LinkedList
@@ -148,14 +187,35 @@ namespace Demo
             //}
             #endregion
             #region Sorted Dictionary
-            SortedDictionary<string, int> SortedNote = new SortedDictionary<string, int>(new SortedDictionary());
-            SortedNote.Add("Omar", 7132);
-            SortedNote.Add("Mazen", 132);
-            SortedNote.Add("Zain", 342);
-            foreach (KeyValuePair<string, int> i in SortedNote)
+            //SortedDictionary<string, int> SortedNote = new SortedDictionary<string, int>(new SortedDictionary());
+            //SortedNote.Add("Omar", 7132);
+            //SortedNote.Add("Mazen", 132);
+            //SortedNote.Add("Zain", 342);
+            //foreach (KeyValuePair<string, int> i in SortedNote)
+            //{
+            //    Console.WriteLine($"{i.Key} & {i.Value}");
+            //}
+            #endregion
+            #region HashSet
+            //HashSet<int> Num = new HashSet<int>();
+            //Num.Add(1);
+            //Num.Add(2);
+            //Num.Add(3);
+            //Num.Add(1);
+            //foreach (int i in Num)
+            //{
+            //    Console.WriteLine(i);
+            //}
+
+            HashSet<Movie> movies = new HashSet<Movie>()
             {
-                Console.WriteLine($"{i.Key} & {i.Value}");
-            }
+                new Movie(1,"Home",30000),
+                new Movie(2,"Game",40000),
+                new Movie(3,"Happy New Year",50000),
+            };
+            movies.Add(new Movie(2, "Game", 40000));
+            foreach (var movie in movies)
+                Console.WriteLine(movie);
             #endregion
         }
     }
