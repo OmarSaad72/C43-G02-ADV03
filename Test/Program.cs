@@ -207,15 +207,29 @@ namespace Demo
             //    Console.WriteLine(i);
             //}
 
-            HashSet<Movie> movies = new HashSet<Movie>()
+            //HashSet<Movie> movies = new HashSet<Movie>()
+            //{
+            //    new Movie(1,"Home",30000),
+            //    new Movie(2,"Game",40000),
+            //    new Movie(3,"Happy New Year",50000),
+            //};
+            //movies.Add(new Movie(2, "Game", 40000));
+            //foreach (var movie in movies)
+            //    Console.WriteLine(movie);
+            #endregion
+            #region SortedList
+            SortedList<string, int> Note = new SortedList<string, int>(new SortedDictionary());
+            Note.Add("Omar", 7132);
+            Note.Add("Zain", 342);
+            Note.Add("Mazen", 132);
+            Note.SetValueAtIndex(2, 368);
+            foreach (KeyValuePair<string, int> i in Note)
             {
-                new Movie(1,"Home",30000),
-                new Movie(2,"Game",40000),
-                new Movie(3,"Happy New Year",50000),
-            };
-            movies.Add(new Movie(2, "Game", 40000));
-            foreach (var movie in movies)
-                Console.WriteLine(movie);
+                Console.WriteLine(i);
+            }
+            int result = Note.GetValueAtIndex(0);
+            Console.WriteLine(result);  
+            Console.WriteLine(Note.GetKeyAtIndex(0)); 
             #endregion
         }
     }
